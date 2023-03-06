@@ -16,8 +16,8 @@ public class WorldGenerator : MonoBehaviour, UnityEngine.EventSystems.IPointerCl
     // Start is called before the first frame update
     void Start()
     {
-        orbitSpeed = 50.0f;
-        orbitRadius = 2.0f;
+        orbitSpeed = 100.0f;
+        orbitRadius = 1.5f;
         cube_instance = Instantiate(central_object, transform);
         sphere_instance = Instantiate(orbit_object);
         sphere_instance.transform.position = new Vector3(orbitRadius, 0.0f, orbitRadius);
@@ -29,6 +29,12 @@ public class WorldGenerator : MonoBehaviour, UnityEngine.EventSystems.IPointerCl
     void Update()
     {
         sphere_instance.transform.RotateAround(cube_instance.transform.position, orbitAxis, orbitSpeed * Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Spacebar pressed!");
+            orbitAxis *= -1;
+            
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
